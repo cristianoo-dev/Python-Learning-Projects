@@ -23,7 +23,7 @@ O objetivo é aprender como realizar requisições HTTP, autenticar em uma API, 
 * Exibir informações como plataforma, gênero e data de lançamento
 * Tratar erros de requisição
 * Validar entradas do usuário
-* Organizar o projeto em módulos
+* Organizar o projeto em módulosp
 
 ## Objetivos de aprendizagem
 
