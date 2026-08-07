@@ -1,4 +1,6 @@
-from auth import obter_credenciais
+from auth import obter_credenciais, obter_token
+
+obter_token()
 
 client_id, client_secret = obter_credenciais()
 
