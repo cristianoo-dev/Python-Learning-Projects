@@ -13,5 +13,18 @@ def obter_credenciais():
     return client_id, client_secret
 
 def obter_token():
-    response = requests.post(URL_TOKEN)
+    dados = {
+        "client_id": client_id,
+        "client_secret": client_secret,
+        "grant_type": "client_credentials"
+    }
+
+    response = requests.post(
+        URL_TOKEN,
+        data=dados
+    )
+
     print(response.status_code)
+
+    resposta = response.json()
+    print(resposta)
