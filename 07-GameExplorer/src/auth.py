@@ -27,4 +27,5 @@ def obter_token():
     print(response.status_code)
 
     resposta = response.json()
-    print(resposta)
+
+    return resposta["access_token"]
