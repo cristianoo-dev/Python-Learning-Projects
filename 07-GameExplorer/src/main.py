@@ -1,28 +1,11 @@
 from auth import obter_credenciais, obter_token
-import requests
+from twitch_api import buscar_jogos
+
 
 client_id, client_secret = obter_credenciais()
 
 token = obter_token()
 
-headers = {
-    "Authorization": f"Bearer {token}",
-    "Client-Id": client_id
-}
+resposta = buscar_jogos(token, client_id, "Minecraft")
 
-URL_JOGOS = "https://api.twitch.tv/helix/games"
-
-params = {
-    "name": "Minecraft"
-}
-
-response = requests.get(
-    URL_JOGOS,
-    headers=headers,
-    params=params
-)
-
-print(response.status_code)
-
-resposta = response.json()
 print(resposta["data"][0]["name"])
