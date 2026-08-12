@@ -24,8 +24,6 @@ def obter_token():
         data=dados
     )
 
-    print(response.status_code)
-
     resposta = response.json()
 
     return resposta["access_token"]

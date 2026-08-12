@@ -17,4 +17,11 @@ def buscar_jogos(token, client_id, nome_jogo):
         params=params
     )
 
+    try:
+        response.raise_for_status()
+
+    except requests.exceptions.HTTPError:
+        print("Erro na comunicação com a Twitch.")
+        return None
+
     return response.json()
