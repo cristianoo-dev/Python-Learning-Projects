@@ -10,5 +10,10 @@ resposta = buscar_jogos(token, client_id, "Minecraft")
 
 if resposta is None:
     print("Não foi possível buscar o jogo.")
+
 else:
-    print(resposta["data"][0]["name"])
+    if resposta["data"]:
+        print(resposta["data"][0]["name"])
+    else:
+        print("Jogo não encontrado.")
+        
