@@ -7,8 +7,11 @@ client_id, client_secret = obter_credenciais()
 # Obtém o token necessário para acessar a API
 token = obter_token()
 
+# Solicita ao usuário o nome do jogo
+nome_jogo = input("Digite o nome do jogo: ")
+
 # Consulta a Twitch pelo jogo informado
-resposta = buscar_jogos(token, client_id, "Minecraft")
+resposta = buscar_jogos(token, client_id, nome_jogo)
 
 # Verifica se houve erro na comunicação com a API
 if resposta is None:
