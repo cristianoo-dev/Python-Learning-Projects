@@ -7,20 +7,20 @@ client_id, client_secret = obter_credenciais()
 # Obtém o token necessário para acessar a API
 token = obter_token()
 
-# Solicita ao usuário o nome do jogo
-nome_jogo = input("Digite o nome do jogo: ")
+while True:
+    nome_jogo = input("Digite o nome do jogo: ")
 
-# Consulta a Twitch pelo jogo informado
-resposta = buscar_jogos(token, client_id, nome_jogo)
+    if nome_jogo == "sair":
+        break
 
-# Verifica se houve erro na comunicação com a API
-if resposta is None:
-    print("Não foi possível buscar o jogo.")
+    resposta = buscar_jogos(token, client_id, nome_jogo)
 
-else:
-    # Verifica se a API encontrou algum jogo
-    if resposta["data"]:
-        print(resposta["data"][0]["name"])
+    if resposta is None:
+        print("Não foi possível buscar o jogo.")
+
     else:
-        print("Jogo não encontrado.")
-           
+        if resposta["data"]:
+            print(resposta["data"][0]["name"])
+        else:
+            print("Jogo não encontrado.")
+ 
