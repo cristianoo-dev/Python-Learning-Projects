@@ -20,7 +20,8 @@ while True:
 
     else:
         if resposta["data"]:
-            print(resposta["data"][0]["name"])
+            jogo = resposta["data"][0]
+            print(jogo)
         else:
             print("Jogo não encontrado.")
  
