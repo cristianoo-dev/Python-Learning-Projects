@@ -29,7 +29,7 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 
     body = f'''
         where id = {jogo_id};
-        fields name, summary, first_release_date;
+        fields name, summary, first_release_date, rating;
     '''
 
     response = requests.post(
@@ -43,7 +43,6 @@ def formatar_data(timestamp):
     data = datetime.fromtimestamp(timestamp)
     return data.strftime("%d/%m/%Y")
 
-
 if __name__ == "__main__":
     from auth import obter_credenciais, obter_token
 
@@ -51,7 +50,11 @@ if __name__ == "__main__":
     token = obter_token()
 
     resposta = buscar_detalhes_jogo(token, client_id, 135400)
+    jogo = resposta.json()[0]
+    timestamp = jogo["first_release_date"]
 
     print(resposta.status_code)
     print(resposta.text)
-    print(formatar_data(1482105600))
+    data_lancamento = formatar_data(timestamp)
+    print(data_lancamento)
+    
