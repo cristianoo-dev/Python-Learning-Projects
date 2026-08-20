@@ -2,6 +2,7 @@ import requests
 from datetime import datetime
 
 URL_JOGOS = "https://api.igdb.com/v4/games"
+URL_GENEROS = "https://api.igdb.com/v4/genres"
 
 def buscar_jogos(token, client_id, nome_jogo):
     headers = {
@@ -29,7 +30,7 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 
     body = f'''
         where id = {jogo_id};
-        fields name, summary, first_release_date, rating;
+        fields name, summary, first_release_date, rating, genres;
     '''
 
     response = requests.post(
@@ -38,6 +39,31 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
         data=body
     )
     return response
+
+def buscar_generos(token, client_id, ids_generos):
+    headers = {
+        "Client-ID": client_id,
+        "Authorization": f"Bearer {token}"
+    }
+
+    ids = ",".join(map(str, ids_generos))
+
+    body = f'''
+        where id = ({ids});
+        fields name;
+    '''
+
+    response = requests.post(
+        URL_GENEROS,
+        headers=headers,
+        data=body
+    )
+    generos = response.json()
+    nomes_generos = []
+
+    for genero in generos:
+        nomes_generos.append(genero["name"])
+    return nomes_generos
 
 def formatar_data(timestamp):
     data = datetime.fromtimestamp(timestamp)
@@ -53,8 +79,14 @@ if __name__ == "__main__":
     jogo = resposta.json()[0]
     timestamp = jogo["first_release_date"]
 
-    print(resposta.status_code)
-    print(resposta.text)
     data_lancamento = formatar_data(timestamp)
-    print(data_lancamento)
-    
+
+    ids_generos = jogo["genres"]
+
+nomes_generos = buscar_generos(
+    token,
+    client_id,
+    ids_generos
+)
+print(data_lancamento)
+print(nomes_generos)
