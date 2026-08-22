@@ -108,6 +108,8 @@ if __name__ == "__main__":
     resposta = buscar_detalhes_jogo(token, client_id, 135400)
 
     jogo = resposta.json()[0]
+    nome = jogo["name"]
+    resumo = jogo["summary"]
 
     timestamp = jogo["first_release_date"]
 
@@ -120,16 +122,21 @@ if __name__ == "__main__":
         client_id,
         ids_generos
     )
+    generos = ", ".join(nomes_generos)
 
     ids_plataformas = jogo["platforms"]
 
     nomes_plataformas = buscar_plataformas(
-        token,
-        client_id,
-        ids_plataformas
+    token,
+    client_id,
+    ids_plataformas
     )
+    plataformas = ", ".join(nomes_plataformas)
 
+    print(nome)
     print(data_lancamento)
-    print(nomes_generos)
-    print(nomes_plataformas)
-
+    print(generos)
+    print(plataformas)
+    print(resumo)
+    rating = round(jogo["rating"], 2)
+    print(f"Avaliação: {rating}")
