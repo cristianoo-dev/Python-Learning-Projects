@@ -133,10 +133,12 @@ if __name__ == "__main__":
     )
     plataformas = ", ".join(nomes_plataformas)
 
-    print(nome)
-    print(data_lancamento)
-    print(generos)
-    print(plataformas)
-    print(resumo)
     rating = round(jogo["rating"], 2)
+
+    print(f"Nome: {nome}")
+    print(f"Data de lançamento: {data_lancamento}")
+    print(f"Gêneros: {generos}")
+    print(f"Plataformas: {plataformas}")
+    print("Resumo:")
+    print(resumo)
     print(f"Avaliação: {rating}")
