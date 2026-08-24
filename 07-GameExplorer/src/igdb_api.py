@@ -98,6 +98,15 @@ def formatar_data(timestamp):
     data = datetime.fromtimestamp(timestamp)
     return data.strftime("%d/%m/%Y")
 
+def exibir_jogo(nome, data_lancamento, generos, plataformas, resumo, rating):
+    print(f"Nome: {nome}")
+    print(f"Data de lançamento: {data_lancamento}")
+    print(f"Gêneros: {generos}")
+    print(f"Plataformas: {plataformas}")
+    print("Resumo:")
+    print(resumo)
+    print(f"Avaliação: {rating:.2f}")
+
 if __name__ == "__main__":
     from auth import obter_credenciais, obter_token
 
@@ -135,10 +144,4 @@ if __name__ == "__main__":
 
     rating = round(jogo["rating"], 2)
 
-    print(f"Nome: {nome}")
-    print(f"Data de lançamento: {data_lancamento}")
-    print(f"Gêneros: {generos}")
-    print(f"Plataformas: {plataformas}")
-    print("Resumo:")
-    print(resumo)
-    print(f"Avaliação: {rating}")
+    exibir_jogo(nome, data_lancamento, generos, plataformas, resumo, rating)
