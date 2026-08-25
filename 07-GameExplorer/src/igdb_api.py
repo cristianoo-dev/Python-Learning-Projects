@@ -114,7 +114,12 @@ if __name__ == "__main__":
 
     token = obter_token()
 
-    resposta = buscar_detalhes_jogo(token, client_id, 135400)
+    resposta_busca = buscar_jogos(token, client_id, "Minecraft")
+    resultados = resposta_busca.json()
+    primeiro_jogo = resultados[0]
+    jogo_id = primeiro_jogo["id"]
+
+    resposta = buscar_detalhes_jogo(token, client_id, jogo_id)
 
     jogo = resposta.json()[0]
     nome = jogo["name"]
@@ -136,9 +141,9 @@ if __name__ == "__main__":
     ids_plataformas = jogo["platforms"]
 
     nomes_plataformas = buscar_plataformas(
-    token,
-    client_id,
-    ids_plataformas
+        token,
+        client_id,
+        ids_plataformas
     )
     plataformas = ", ".join(nomes_plataformas)
 
