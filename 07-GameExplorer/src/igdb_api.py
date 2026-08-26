@@ -114,8 +114,13 @@ if __name__ == "__main__":
 
     token = obter_token()
 
-    resposta_busca = buscar_jogos(token, client_id, "Minecraft")
+    nome_jogo = input("Digite o nome do jogo: ")
+    print(nome_jogo)
+
+
+    resposta_busca = buscar_jogos(token, client_id, nome_jogo)
     resultados = resposta_busca.json()
+    print(resultados)
     primeiro_jogo = resultados[0]
     jogo_id = primeiro_jogo["id"]
 
