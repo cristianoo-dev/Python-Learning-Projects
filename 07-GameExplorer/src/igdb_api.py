@@ -115,14 +115,19 @@ if __name__ == "__main__":
     token = obter_token()
 
     nome_jogo = input("Digite o nome do jogo: ")
-    print(nome_jogo)
-
 
     resposta_busca = buscar_jogos(token, client_id, nome_jogo)
     resultados = resposta_busca.json()
-    print(resultados)
-    primeiro_jogo = resultados[0]
-    jogo_id = primeiro_jogo["id"]
+    for indice, jogo in enumerate(resultados, start=1):
+        print(indice, "-", jogo["name"])
+
+    escolha = int(input("Escolha um jogo: "))
+
+    jogo_escolhido = resultados[escolha - 1]
+
+    jogo_id = jogo_escolhido["id"]
+
+    print(jogo_id)
 
     resposta = buscar_detalhes_jogo(token, client_id, jogo_id)
 
