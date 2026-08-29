@@ -5,8 +5,17 @@ from igdb_api import (
     buscar_generos,
     buscar_plataformas,
     formatar_data,
-    exibir_jogo
+    preparar_jogo
 )
+
+def exibir_jogo(nome, data_lancamento, generos, plataformas, resumo, rating):
+    print(f"Nome: {nome}")
+    print(f"Data de lançamento: {data_lancamento}")
+    print(f"Gêneros: {generos}")
+    print(f"Plataformas: {plataformas}")
+    print("Resumo:")
+    print(resumo)
+    print(f"Avaliação: {rating:.2f}")
 
 # Obtém as credenciais da aplicação
 client_id, client_secret = obter_credenciais()
@@ -44,44 +53,17 @@ while True:
     jogo_escolhido = resultados[escolha - 1]
 
     jogo_id = jogo_escolhido["id"]
-
     resposta = buscar_detalhes_jogo(token, client_id, jogo_id)
 
     jogo = resposta.json()[0]
 
-    nome = jogo["name"]
-    resumo = jogo["summary"]
-
-    timestamp = jogo["first_release_date"]
-    data_lancamento = formatar_data(timestamp)
-
-    ids_generos = jogo["genres"]
-
-    nomes_generos = buscar_generos(
-        token,
-        client_id,
-        ids_generos
-    )
-
-    generos = ", ".join(nomes_generos)
-
-    ids_plataformas = jogo["platforms"]
-
-    nomes_plataformas = buscar_plataformas(
-        token,
-        client_id,
-        ids_plataformas
-    )
-
-    plataformas = ", ".join(nomes_plataformas)
-
-    rating = round(jogo["rating"], 2)
-
+    jogo = preparar_jogo(token, client_id, jogo)
+    
     exibir_jogo(
-        nome,
-        data_lancamento,
-        generos,
-        plataformas,
-        resumo,
-        rating
+        jogo["nome"],
+        jogo["data_lancamento"],
+        jogo["generos"],
+        jogo["plataformas"],
+        jogo["resumo"],
+        jogo["rating"]
     )

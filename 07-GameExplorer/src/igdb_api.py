@@ -98,11 +98,40 @@ def formatar_data(timestamp):
     data = datetime.fromtimestamp(timestamp)
     return data.strftime("%d/%m/%Y")
 
-def exibir_jogo(nome, data_lancamento, generos, plataformas, resumo, rating):
-    print(f"Nome: {nome}")
-    print(f"Data de lançamento: {data_lancamento}")
-    print(f"Gêneros: {generos}")
-    print(f"Plataformas: {plataformas}")
-    print("Resumo:")
-    print(resumo)
-    print(f"Avaliação: {rating:.2f}")
+def preparar_jogo(token, client_id, jogo):
+    nome = jogo["name"]
+    resumo = jogo["summary"]
+
+    timestamp = jogo["first_release_date"]
+    data_lancamento = formatar_data(timestamp)
+
+    ids_generos = jogo["genres"]
+
+    nomes_generos = buscar_generos(
+        token,
+        client_id,
+        ids_generos
+    )
+
+    generos = ", ".join(nomes_generos)
+
+    ids_plataformas = jogo["platforms"]
+
+    nomes_plataformas = buscar_plataformas(
+        token,
+        client_id,
+        ids_plataformas
+    )
+
+    plataformas = ", ".join(nomes_plataformas)
+
+    rating = round(jogo["rating"], 2)
+
+    return {
+        "nome": nome,
+        "data_lancamento": data_lancamento,
+        "generos": generos,
+        "plataformas": plataformas,
+        "resumo": resumo,
+        "rating": rating
+    }
