@@ -24,10 +24,22 @@ while True:
 
     resultados = resposta.json()
 
+    if not resultados:
+        print("Jogo não encontrado.")
+        continue
+
     for indice, jogo in enumerate(resultados, start=1):
         print(indice, "-", jogo["name"])
 
-    escolha = int(input("Escolha um jogo: "))
+    try:
+        escolha = int(input("Escolha um jogo: "))
+    except ValueError:
+        print("Escolha inválida.")
+        continue
+
+    if escolha < 1 or escolha > len(resultados):
+        print("Escolha inválida.")
+        continue
 
     jogo_escolhido = resultados[escolha - 1]
 
