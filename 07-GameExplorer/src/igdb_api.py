@@ -6,6 +6,7 @@ URL_GENEROS = "https://api.igdb.com/v4/genres"
 URL_PLATAFORMAS = "https://api.igdb.com/v4/platforms"
 
 def buscar_jogos(token, client_id, nome_jogo):
+
     headers = {
         "Client-ID": client_id,
         "Authorization": f"Bearer {token}"
@@ -21,7 +22,14 @@ def buscar_jogos(token, client_id, nome_jogo):
         headers=headers,
         data=body
     )
-    return response
+
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        print("Erro na comunicação com a IGDB.")
+        return None
+
+    return response.json()
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
     headers = {
