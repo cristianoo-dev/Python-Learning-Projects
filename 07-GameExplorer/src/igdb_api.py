@@ -143,3 +143,12 @@ def preparar_jogo(token, client_id, jogo):
         "resumo": resumo,
         "rating": rating
     }
+
+def obter_detalhes_jogo(token, client_id, jogo_id):
+    resposta = buscar_detalhes_jogo(
+        token,
+        client_id,
+        jogo_id
+    )
+
+    return resposta.json()[0]

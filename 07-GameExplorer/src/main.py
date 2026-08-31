@@ -2,10 +2,7 @@ from auth import obter_credenciais, obter_token
 
 from igdb_api import (
     buscar_jogos,
-    buscar_detalhes_jogo,
-    buscar_generos,
-    buscar_plataformas,
-    formatar_data,
+    obter_detalhes_jogo,
     preparar_jogo
 )
 
@@ -26,15 +23,12 @@ def exibir_jogo(
     print(f"Avaliação: {rating:.2f}")
 
 # Obtém as credenciais da aplicação
-
 client_id, client_secret = obter_credenciais()
 
 # Obtém o token necessário para acessar a API
 token = obter_token()
 
-
 while True:
-
     nome_jogo = input("Digite o nome do jogo: ")
 
     if nome_jogo == "sair":
@@ -64,16 +58,13 @@ while True:
         continue
 
     jogo_escolhido = resultados[escolha - 1]
-
     jogo_id = jogo_escolhido["id"]
 
-    resposta = buscar_detalhes_jogo(
+    jogo = obter_detalhes_jogo(
         token,
         client_id,
         jogo_id
     )
-
-    jogo = resposta.json()[0]
 
     jogo = preparar_jogo(
         token,
