@@ -47,6 +47,13 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
         headers=headers,
         data=body
     )
+
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        print("Erro na comunicação com a IGDB.")
+        return None
+
     return response
 
 def buscar_generos(token, client_id, ids_generos):
@@ -150,5 +157,17 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
         client_id,
         jogo_id
     )
+
+    return resposta.json()[0]
+
+def obter_detalhes_jogo(token, client_id, jogo_id):
+    resposta = buscar_detalhes_jogo(
+        token,
+        client_id,
+        jogo_id
+    )
+
+    if resposta is None:
+        return None
 
     return resposta.json()[0]

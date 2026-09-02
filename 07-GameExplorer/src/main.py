@@ -66,6 +66,10 @@ while True:
         jogo_id
     )
 
+    if jogo is None:
+        print("Não foi possível obter os detalhes do jogo.")
+        continue
+
     jogo = preparar_jogo(
         token,
         client_id,
