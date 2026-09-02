@@ -20,7 +20,7 @@ def exibir_jogo(
     print(f"Plataformas: {plataformas}")
     print("Resumo:")
     print(resumo)
-    print(f"Avaliação: {rating:.2f}")
+    print(f"Avaliação: {rating}")
 
 # Obtém as credenciais da aplicação
 client_id, client_secret = obter_credenciais()

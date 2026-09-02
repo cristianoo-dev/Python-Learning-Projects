@@ -115,7 +115,7 @@ def formatar_data(timestamp):
 
 def preparar_jogo(token, client_id, jogo):
     nome = jogo["name"]
-    resumo = jogo["summary"]
+    resumo = jogo.get("summary", "Não disponível.")
 
     timestamp = jogo["first_release_date"]
     data_lancamento = formatar_data(timestamp)
@@ -140,15 +140,20 @@ def preparar_jogo(token, client_id, jogo):
 
     plataformas = ", ".join(nomes_plataformas)
 
-    rating = round(jogo["rating"], 2)
+    rating = jogo.get("rating")
 
-    return {
-        "nome": nome,
-        "data_lancamento": data_lancamento,
-        "generos": generos,
-        "plataformas": plataformas,
-        "resumo": resumo,
-        "rating": rating
+    if rating is not None:
+        rating = round(rating, 2)
+    else:
+        rating = "Não disponível."
+
+        return {
+            "nome": nome,
+            "data_lancamento": data_lancamento,
+            "generos": generos,
+            "plataformas": plataformas,
+            "resumo": resumo,
+            "rating": rating
     }
 
 def obter_detalhes_jogo(token, client_id, jogo_id):
