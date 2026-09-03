@@ -32,6 +32,7 @@ def buscar_jogos(token, client_id, nome_jogo):
     return response.json()
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
+
     headers = {
         "Client-ID": client_id,
         "Authorization": f"Bearer {token}"
@@ -57,6 +58,7 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
     return response
 
 def buscar_generos(token, client_id, ids_generos):
+
     headers = {
         "Client-ID": client_id,
         "Authorization": f"Bearer {token}"
@@ -74,14 +76,18 @@ def buscar_generos(token, client_id, ids_generos):
         headers=headers,
         data=body
     )
+
     generos = response.json()
+
     nomes_generos = []
 
     for genero in generos:
         nomes_generos.append(genero["name"])
+
     return nomes_generos
 
 def buscar_plataformas(token, client_id, ids_plataformas):
+
     headers = {
         "Client-ID": client_id,
         "Authorization": f"Bearer {token}"
@@ -110,14 +116,19 @@ def buscar_plataformas(token, client_id, ids_plataformas):
     return nomes_plataformas
 
 def formatar_data(timestamp):
+
     data = datetime.fromtimestamp(timestamp)
+
     return data.strftime("%d/%m/%Y")
 
 def preparar_jogo(token, client_id, jogo):
+
     nome = jogo["name"]
+
     resumo = jogo.get("summary", "Não disponível.")
 
     timestamp = jogo["first_release_date"]
+
     data_lancamento = formatar_data(timestamp)
 
     ids_generos = jogo["genres"]
@@ -147,25 +158,17 @@ def preparar_jogo(token, client_id, jogo):
     else:
         rating = "Não disponível."
 
-        return {
-            "nome": nome,
-            "data_lancamento": data_lancamento,
-            "generos": generos,
-            "plataformas": plataformas,
-            "resumo": resumo,
-            "rating": rating
+    return {
+        "nome": nome,
+        "data_lancamento": data_lancamento,
+        "generos": generos,
+        "plataformas": plataformas,
+        "resumo": resumo,
+        "rating": rating
     }
 
 def obter_detalhes_jogo(token, client_id, jogo_id):
-    resposta = buscar_detalhes_jogo(
-        token,
-        client_id,
-        jogo_id
-    )
 
-    return resposta.json()[0]
-
-def obter_detalhes_jogo(token, client_id, jogo_id):
     resposta = buscar_detalhes_jogo(
         token,
         client_id,
