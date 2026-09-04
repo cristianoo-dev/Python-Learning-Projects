@@ -131,25 +131,28 @@ def preparar_jogo(token, client_id, jogo):
 
     data_lancamento = formatar_data(timestamp)
 
-    ids_generos = jogo["genres"]
+    ids_generos = jogo.get("genres", [])
+    if ids_generos:
+        nomes_generos = buscar_generos(
+            token,
+            client_id,
+            ids_generos
+        )
+        generos = ", ".join(nomes_generos)
+    else:
+        generos = "Não disponível."
 
-    nomes_generos = buscar_generos(
-        token,
-        client_id,
-        ids_generos
-    )
+    ids_plataformas = jogo.get("platforms", [])
 
-    generos = ", ".join(nomes_generos)
-
-    ids_plataformas = jogo["platforms"]
-
-    nomes_plataformas = buscar_plataformas(
-        token,
-        client_id,
-        ids_plataformas
-    )
-
-    plataformas = ", ".join(nomes_plataformas)
+    if ids_plataformas:
+        nomes_plataformas = buscar_plataformas(
+            token,
+            client_id,
+            ids_plataformas
+        )
+        plataformas = ", ".join(nomes_plataformas)
+    else:
+        plataformas = "Não disponível."
 
     rating = jogo.get("rating")
 
