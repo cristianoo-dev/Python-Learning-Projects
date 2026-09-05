@@ -126,10 +126,13 @@ def preparar_jogo(token, client_id, jogo):
     nome = jogo["name"]
 
     resumo = jogo.get("summary", "Não disponível.")
+    
+    timestamp = jogo.get("first_release_date")
 
-    timestamp = jogo["first_release_date"]
-
-    data_lancamento = formatar_data(timestamp)
+    if timestamp is not None:
+        data_lancamento = formatar_data(timestamp)
+    else:
+        data_lancamento = "Não disponível."
 
     ids_generos = jogo.get("genres", [])
     if ids_generos:
