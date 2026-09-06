@@ -184,4 +184,9 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
     if resposta is None:
         return None
 
-    return resposta.json()[0]
+    dados = resposta.json()
+
+    if not dados:
+        return None
+
+    return dados[0]
