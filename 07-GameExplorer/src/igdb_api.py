@@ -77,6 +77,12 @@ def buscar_generos(token, client_id, ids_generos):
         data=body
     )
 
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        print("Erro na comunicação com a IGDB.")
+        return None
+
     generos = response.json()
 
     nomes_generos = []
@@ -126,7 +132,7 @@ def preparar_jogo(token, client_id, jogo):
     nome = jogo["name"]
 
     resumo = jogo.get("summary", "Não disponível.")
-    
+
     timestamp = jogo.get("first_release_date")
 
     if timestamp is not None:
@@ -135,12 +141,17 @@ def preparar_jogo(token, client_id, jogo):
         data_lancamento = "Não disponível."
 
     ids_generos = jogo.get("genres", [])
+
     if ids_generos:
         nomes_generos = buscar_generos(
             token,
             client_id,
             ids_generos
         )
+
+        if nomes_generos is None:
+            return None
+
         generos = ", ".join(nomes_generos)
     else:
         generos = "Não disponível."
@@ -153,6 +164,7 @@ def preparar_jogo(token, client_id, jogo):
             client_id,
             ids_plataformas
         )
+
         plataformas = ", ".join(nomes_plataformas)
     else:
         plataformas = "Não disponível."

@@ -75,6 +75,10 @@ while True:
         client_id,
         jogo
     )
+    
+    if jogo is None:
+        print("Não foi possível preparar os dados do jogo.")
+        continue
 
     exibir_jogo(
         jogo["nome"],
