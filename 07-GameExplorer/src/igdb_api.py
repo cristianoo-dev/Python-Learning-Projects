@@ -112,6 +112,12 @@ def buscar_plataformas(token, client_id, ids_plataformas):
         data=body
     )
 
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        print("Erro na comunicação com a IGDB.")
+        return None
+
     plataformas = response.json()
 
     nomes_plataformas = []
@@ -164,6 +170,9 @@ def preparar_jogo(token, client_id, jogo):
             client_id,
             ids_plataformas
         )
+
+        if nomes_plataformas is None:
+            return None
 
         plataformas = ", ".join(nomes_plataformas)
     else:
