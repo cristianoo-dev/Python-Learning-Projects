@@ -60,31 +60,31 @@ while True:
     jogo_escolhido = resultados[escolha - 1]
     jogo_id = jogo_escolhido["id"]
 
-    jogo = obter_detalhes_jogo(
+    detalhes_jogo = obter_detalhes_jogo(
         token,
         client_id,
         jogo_id
     )
 
-    if jogo is None:
+    if detalhes_jogo is None:
         print("Não foi possível obter os detalhes do jogo.")
         continue
 
-    jogo = preparar_jogo(
+    jogo_preparado = preparar_jogo(
         token,
         client_id,
-        jogo
+        detalhes_jogo
     )
-    
-    if jogo is None:
+
+    if jogo_preparado is None:
         print("Não foi possível preparar os dados do jogo.")
         continue
 
     exibir_jogo(
-        jogo["nome"],
-        jogo["data_lancamento"],
-        jogo["generos"],
-        jogo["plataformas"],
-        jogo["resumo"],
-        jogo["rating"]
+        jogo_preparado["nome"],
+        jogo_preparado["data_lancamento"],
+        jogo_preparado["generos"],
+        jogo_preparado["plataformas"],
+        jogo_preparado["resumo"],
+        jogo_preparado["rating"]
     )
