@@ -5,12 +5,16 @@ URL_JOGOS = "https://api.igdb.com/v4/games"
 URL_GENEROS = "https://api.igdb.com/v4/genres"
 URL_PLATAFORMAS = "https://api.igdb.com/v4/platforms"
 
-def buscar_jogos(token, client_id, nome_jogo):
+def criar_headers(token, client_id):
 
-    headers = {
+    return {
         "Client-ID": client_id,
         "Authorization": f"Bearer {token}"
     }
+
+def buscar_jogos(token, client_id, nome_jogo):
+
+    headers = criar_headers(token, client_id)
 
     body = f'''
         search "{nome_jogo}";
@@ -33,10 +37,7 @@ def buscar_jogos(token, client_id, nome_jogo):
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
 
-    headers = {
-        "Client-ID": client_id,
-        "Authorization": f"Bearer {token}"
-    }
+    headers = criar_headers(token, client_id)
 
     body = f'''
         where id = {jogo_id};
@@ -59,10 +60,7 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 
 def buscar_generos(token, client_id, ids_generos):
 
-    headers = {
-        "Client-ID": client_id,
-        "Authorization": f"Bearer {token}"
-    }
+    headers = criar_headers(token, client_id)
 
     ids = ",".join(map(str, ids_generos))
 
@@ -94,10 +92,7 @@ def buscar_generos(token, client_id, ids_generos):
 
 def buscar_plataformas(token, client_id, ids_plataformas):
 
-    headers = {
-        "Client-ID": client_id,
-        "Authorization": f"Bearer {token}"
-    }
+    headers = criar_headers(token, client_id)
 
     ids = ",".join(map(str, ids_plataformas))
 
