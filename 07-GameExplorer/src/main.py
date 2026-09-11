@@ -6,21 +6,15 @@ from igdb_api import (
     preparar_jogo
 )
 
-def exibir_jogo(
-    nome,
-    data_lancamento,
-    generos,
-    plataformas,
-    resumo,
-    rating
-):
-    print(f"Nome: {nome}")
-    print(f"Data de lançamento: {data_lancamento}")
-    print(f"Gêneros: {generos}")
-    print(f"Plataformas: {plataformas}")
+def exibir_jogo(jogo):
+
+    print(f"Nome: {jogo['nome']}")
+    print(f"Data de lançamento: {jogo['data_lancamento']}")
+    print(f"Gêneros: {jogo['generos']}")
+    print(f"Plataformas: {jogo['plataformas']}")
     print("Resumo:")
-    print(resumo)
-    print(f"Avaliação: {rating}")
+    print(jogo["resumo"])
+    print(f"Avaliação: {jogo['rating']}")
 
 # Obtém as credenciais da aplicação
 client_id, client_secret = obter_credenciais()
@@ -80,11 +74,4 @@ while True:
         print("Não foi possível preparar os dados do jogo.")
         continue
 
-    exibir_jogo(
-        jogo_preparado["nome"],
-        jogo_preparado["data_lancamento"],
-        jogo_preparado["generos"],
-        jogo_preparado["plataformas"],
-        jogo_preparado["resumo"],
-        jogo_preparado["rating"]
-    )
+    exibir_jogo(jogo_preparado)
