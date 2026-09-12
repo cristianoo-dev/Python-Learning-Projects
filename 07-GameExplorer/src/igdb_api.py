@@ -58,69 +58,54 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 
     return response
 
+def buscar_nomes(token, client_id, url, ids):
+
+    headers = criar_headers(token, client_id)
+
+    ids_formatados = ",".join(map(str, ids))
+
+    body = f'''
+        where id = ({ids_formatados});
+        fields name;
+    '''
+
+    response = requests.post(
+        url,
+        headers=headers,
+        data=body
+    )
+
+    try:
+        response.raise_for_status()
+    except requests.exceptions.HTTPError:
+        print("Erro na comunicação com a IGDB.")
+        return None
+
+    dados = response.json()
+
+    nomes = []
+
+    for item in dados:
+        nomes.append(item["name"])
+
+    return nomes
+
 def buscar_generos(token, client_id, ids_generos):
 
-    headers = criar_headers(token, client_id)
-
-    ids = ",".join(map(str, ids_generos))
-
-    body = f'''
-        where id = ({ids});
-        fields name;
-    '''
-
-    response = requests.post(
+    return buscar_nomes(
+        token,
+        client_id,
         URL_GENEROS,
-        headers=headers,
-        data=body
+        ids_generos
     )
-
-    try:
-        response.raise_for_status()
-    except requests.exceptions.HTTPError:
-        print("Erro na comunicação com a IGDB.")
-        return None
-
-    generos = response.json()
-
-    nomes_generos = []
-
-    for genero in generos:
-        nomes_generos.append(genero["name"])
-
-    return nomes_generos
-
 def buscar_plataformas(token, client_id, ids_plataformas):
 
-    headers = criar_headers(token, client_id)
-
-    ids = ",".join(map(str, ids_plataformas))
-
-    body = f'''
-        where id = ({ids});
-        fields name;
-    '''
-
-    response = requests.post(
+    return buscar_nomes(
+        token,
+        client_id,
         URL_PLATAFORMAS,
-        headers=headers,
-        data=body
+        ids_plataformas
     )
-
-    try:
-        response.raise_for_status()
-    except requests.exceptions.HTTPError:
-        print("Erro na comunicação com a IGDB.")
-        return None
-
-    plataformas = response.json()
-
-    nomes_plataformas = []
-
-    for plataforma in plataformas:
-        nomes_plataformas.append(plataforma["name"])
-
-    return nomes_plataformas
 
 def formatar_data(timestamp):
 
