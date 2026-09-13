@@ -82,7 +82,7 @@ def buscar_nomes(token, client_id, url, ids):
         return None
 
     dados = response.json()
-
+    
     nomes = []
 
     for item in dados:
@@ -138,12 +138,15 @@ def preparar_jogo(token, client_id, jogo):
         if nomes_generos is None:
             return None
 
-        generos = ", ".join(nomes_generos)
+        if nomes_generos:
+            generos = ", ".join(nomes_generos)
+        else:
+            generos = "Não disponível."
     else:
         generos = "Não disponível."
 
     ids_plataformas = jogo.get("platforms", [])
-
+    
     if ids_plataformas:
         nomes_plataformas = buscar_plataformas(
             token,
@@ -154,7 +157,10 @@ def preparar_jogo(token, client_id, jogo):
         if nomes_plataformas is None:
             return None
 
-        plataformas = ", ".join(nomes_plataformas)
+        if nomes_plataformas:
+            plataformas = ", ".join(nomes_plataformas)
+        else:
+            plataformas = "Não disponível."
     else:
         plataformas = "Não disponível."
 
