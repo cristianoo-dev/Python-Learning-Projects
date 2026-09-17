@@ -12,18 +12,11 @@ def criar_headers(token, client_id):
         "Authorization": f"Bearer {token}"
     }
 
-def buscar_jogos(token, client_id, nome_jogo):
-
-    headers = criar_headers(token, client_id)
-
-    body = f'''
-        search "{nome_jogo}";
-        fields id, name;
-    '''
+def fazer_requisicao(url, headers, body):
 
     try:
         response = requests.post(
-            URL_JOGOS,
+            url,
             headers=headers,
             data=body
         )
@@ -36,6 +29,26 @@ def buscar_jogos(token, client_id, nome_jogo):
 
     except requests.exceptions.RequestException:
         print("Não foi possível conectar à IGDB.")
+        return None
+
+    return response
+
+def buscar_jogos(token, client_id, nome_jogo):
+
+    headers = criar_headers(token, client_id)
+
+    body = f'''
+        search "{nome_jogo}";
+        fields id, name;
+    '''
+
+    response = fazer_requisicao(
+        URL_JOGOS,
+        headers,
+        body
+    )
+
+    if response is None:
         return None
 
     return response.json()
