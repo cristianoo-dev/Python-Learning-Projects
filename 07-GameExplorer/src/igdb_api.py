@@ -84,21 +84,13 @@ def buscar_nomes(token, client_id, url, ids):
         fields name;
     '''
 
-    try:
-        response = requests.post(
-            url,
-            headers=headers,
-            data=body
-        )
+    response = fazer_requisicao(
+        url,
+        headers,
+        body
+    )
 
-        response.raise_for_status()
-
-    except requests.exceptions.HTTPError:
-        print("Erro na comunicação com a IGDB.")
-        return None
-
-    except requests.exceptions.RequestException:
-        print("Não foi possível conectar à IGDB.")
+    if response is None:
         return None
 
     dados = response.json()
