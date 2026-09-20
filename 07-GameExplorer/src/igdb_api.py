@@ -18,10 +18,15 @@ def fazer_requisicao(url, headers, body):
         response = requests.post(
             url,
             headers=headers,
-            data=body
+            data=body,
+            timeout=10
         )
 
         response.raise_for_status()
+
+    except requests.exceptions.Timeout:
+        print("A comunicação com a IGDB excedeu o tempo limite.")
+        return None
 
     except requests.exceptions.HTTPError:
         print("Erro na comunicação com a IGDB.")
