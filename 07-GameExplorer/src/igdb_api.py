@@ -38,6 +38,15 @@ def fazer_requisicao(url, headers, body):
 
     return response
 
+def obter_json(response):
+
+    try:
+        return response.json()
+
+    except ValueError:
+        print("A resposta da IGDB não está em um formato válido.")
+        return None
+
 def buscar_jogos(token, client_id, nome_jogo):
 
     headers = criar_headers(token, client_id)
@@ -56,7 +65,12 @@ def buscar_jogos(token, client_id, nome_jogo):
     if response is None:
         return None
 
-    return response.json()
+    dados = obter_json(response)
+
+    if dados is None:
+        return None
+
+    return dados
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
 
