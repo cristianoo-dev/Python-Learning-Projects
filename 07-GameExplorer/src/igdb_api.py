@@ -112,7 +112,10 @@ def buscar_nomes(token, client_id, url, ids):
     if response is None:
         return None
 
-    dados = response.json()
+    dados = obter_json(response)
+
+    if dados is None:
+        return None
 
     nomes = []
 
