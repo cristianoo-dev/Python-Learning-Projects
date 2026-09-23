@@ -225,7 +225,10 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
     if resposta is None:
         return None
 
-    dados = resposta.json()
+    dados = obter_json(resposta)
+
+    if dados is None:
+        return None
 
     if not dados:
         return None
