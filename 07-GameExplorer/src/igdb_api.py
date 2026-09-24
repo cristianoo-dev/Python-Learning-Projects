@@ -151,7 +151,10 @@ def preparar_jogo(token, client_id, jogo):
 
     nome = jogo["name"]
 
-    resumo = jogo.get("summary", "Não disponível.")
+    resumo = jogo.get("summary")
+
+    if resumo is None:
+        resumo = "Não disponível."
 
     timestamp = jogo.get("first_release_date")
 
