@@ -15,6 +15,7 @@ def obter_credenciais():
     return client_id, client_secret
 
 def obter_token():
+
     # Dados necessários para autenticação da aplicação
     dados = {
         "client_id": client_id,
@@ -23,16 +24,20 @@ def obter_token():
     }
 
     # Solicita um token de acesso à Twitch
-    response = requests.post(
-        URL_TOKEN,
-        data=dados
-    )
-
     try:
+        response = requests.post(
+            URL_TOKEN,
+            data=dados
+        )
+
         response.raise_for_status()
 
     except requests.exceptions.HTTPError:
         print("Erro na comunicação com a Twitch.")
+        return None
+
+    except requests.exceptions.RequestException:
+        print("Não foi possível conectar à Twitch.")
         return None
 
     resposta = response.json()
