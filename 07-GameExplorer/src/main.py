@@ -1,3 +1,4 @@
+import sys
 from auth import obter_credenciais, obter_token
 
 from igdb_api import (
@@ -21,6 +22,10 @@ client_id, client_secret = obter_credenciais()
 
 # Obtém o token necessário para acessar a API
 token = obter_token()
+
+if token is None:
+    print("Não foi possível autenticar na Twitch.")
+    sys.exit()
 
 while True:
     nome_jogo = input("Digite o nome do jogo: ")
