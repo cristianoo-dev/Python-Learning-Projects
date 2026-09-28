@@ -40,7 +40,12 @@ def obter_token():
         print("Não foi possível conectar à Twitch.")
         return None
 
-    resposta = response.json()
+    try:
+        resposta = response.json()
+
+    except ValueError:
+        print("A resposta da Twitch não está em um formato válido.")
+        return None
 
     # Retorna somente o token necessário para as requisições à API
     return resposta["access_token"]
