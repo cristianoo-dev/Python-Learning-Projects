@@ -47,5 +47,10 @@ def obter_token():
         print("A resposta da Twitch não está em um formato válido.")
         return None
 
-    # Retorna somente o token necessário para as requisições à API
-    return resposta["access_token"]
+    token = resposta.get("access_token")
+
+    if token is None:
+        print("A resposta da Twitch não contém um token de acesso.")
+        return None
+
+    return token
