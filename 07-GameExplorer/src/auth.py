@@ -15,6 +15,9 @@ def obter_credenciais():
     return client_id, client_secret
 
 def obter_token():
+    if not client_id or not client_secret:
+        print("As credenciais da Twitch não foram configuradas.")
+        return None
 
     # Dados necessários para autenticação da aplicação
     dados = {
