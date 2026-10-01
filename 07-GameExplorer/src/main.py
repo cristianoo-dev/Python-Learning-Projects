@@ -18,7 +18,7 @@ def exibir_jogo(jogo):
     print(f"Avaliação: {jogo['rating']}")
 
 # Obtém as credenciais da aplicação
-client_id, client_secret = obter_credenciais()
+client_id, _ = obter_credenciais()
 
 # Obtém o token necessário para acessar a API
 token = obter_token()

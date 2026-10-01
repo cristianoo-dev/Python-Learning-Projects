@@ -30,10 +30,15 @@ def obter_token():
     try:
         response = requests.post(
             URL_TOKEN,
-            data=dados
+            data=dados,
+            timeout=10
         )
 
         response.raise_for_status()
+
+    except requests.exceptions.Timeout:
+        print("A comunicação com a Twitch excedeu o tempo limite.")
+        return None
 
     except requests.exceptions.HTTPError:
         print("Erro na comunicação com a Twitch.")
