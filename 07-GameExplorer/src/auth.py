@@ -41,7 +41,7 @@ def obter_token():
         return None
 
     except requests.exceptions.HTTPError:
-        print("Erro na comunicação com a Twitch.")
+        print(f"Erro na comunicação com a Twitch. Código: {response.status_code}")
         return None
 
     except requests.exceptions.RequestException:
