@@ -50,8 +50,13 @@ def obter_token():
 
     try:
         resposta = response.json()
+
     except ValueError:
         print("A resposta da Twitch não está em um formato válido.")
+        return None
+
+    if not isinstance(resposta, dict):
+        print("A resposta da Twitch não está no formato esperado.")
         return None
 
     token = resposta.get("access_token")
