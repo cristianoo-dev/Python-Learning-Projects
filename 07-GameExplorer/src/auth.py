@@ -61,7 +61,9 @@ def obter_token():
 
     token = resposta.get("access_token")
 
-    if not token:
+    token = resposta.get("access_token")
+
+    if not isinstance(token, str) or not token:
         print("A resposta da Twitch não contém um token de acesso válido.")
         return None
 
