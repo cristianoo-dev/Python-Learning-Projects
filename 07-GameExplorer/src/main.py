@@ -28,10 +28,14 @@ if token is None:
     sys.exit()
 
 while True:
-    nome_jogo = input("Digite o nome do jogo: ")
+    nome_jogo = input("Digite o nome do jogo: ").strip()
 
     if nome_jogo == "sair":
         break
+
+    if not nome_jogo:
+        print("O nome do jogo não pode estar vazio.")
+        continue
 
     resultados = buscar_jogos(token, client_id, nome_jogo)
 
