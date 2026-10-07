@@ -30,7 +30,7 @@ if token is None:
 while True:
     nome_jogo = input("Digite o nome do jogo: ").strip()
 
-    if nome_jogo == "sair":
+    if nome_jogo.lower() == "sair":
         break
 
     if not nome_jogo:
