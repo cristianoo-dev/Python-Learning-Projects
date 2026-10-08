@@ -25,7 +25,7 @@ token = obter_token()
 
 if token is None:
     print("Não foi possível autenticar na Twitch.")
-    sys.exit()
+    sys.exit(1)
 
 while True:
     nome_jogo = input("Digite o nome do jogo: ").strip()
