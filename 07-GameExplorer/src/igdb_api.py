@@ -29,7 +29,7 @@ def fazer_requisicao(url, headers, body):
         return None
 
     except requests.exceptions.HTTPError:
-        print("Erro na comunicação com a IGDB.")
+        print(f"Erro na comunicação com a IGDB. Código: {response.status_code}")
         return None
 
     except requests.exceptions.RequestException:
