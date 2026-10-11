@@ -233,6 +233,10 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
     if dados is None:
         return None
 
+    if not isinstance(dados, list):
+        print("A resposta da IGDB não está no formato esperado.")
+        return None
+
     if not dados:
         return None
 
