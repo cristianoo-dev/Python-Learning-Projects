@@ -240,4 +240,8 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
     if not dados:
         return None
 
+    if not isinstance(dados[0], dict):
+        print("Os detalhes do jogo não estão no formato esperado.")
+        return None
+
     return dados[0]
