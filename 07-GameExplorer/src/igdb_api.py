@@ -70,6 +70,10 @@ def buscar_jogos(token, client_id, nome_jogo):
     if dados is None:
         return None
 
+    if not isinstance(dados, list):
+        print("A resposta da IGDB não está no formato esperado.")
+        return None
+
     return dados
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
