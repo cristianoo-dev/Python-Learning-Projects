@@ -74,6 +74,11 @@ def buscar_jogos(token, client_id, nome_jogo):
         print("A resposta da IGDB não está no formato esperado.")
         return None
 
+    for jogo in dados:
+        if not isinstance(jogo, dict) or not isinstance(jogo.get("name"), str):
+            print("Os resultados da busca não estão no formato esperado.")
+            return None
+
     return dados
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
