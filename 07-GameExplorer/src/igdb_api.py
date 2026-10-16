@@ -162,7 +162,11 @@ def formatar_data(timestamp):
 
 def preparar_jogo(token, client_id, jogo):
 
-    nome = jogo["name"]
+    nome = jogo.get("name")
+
+    if not isinstance(nome, str) or not nome:
+        print("Os dados do jogo não contêm um nome válido.")
+        return None
 
     resumo = jogo.get("summary")
 
