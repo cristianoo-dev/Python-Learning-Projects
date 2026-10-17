@@ -172,6 +172,9 @@ def preparar_jogo(token, client_id, jogo):
 
     if resumo is None:
         resumo = "Não disponível."
+    elif not isinstance(resumo, str):
+        print("O resumo do jogo está em um formato inválido.")
+        return None
 
     timestamp = jogo.get("first_release_date")
 
