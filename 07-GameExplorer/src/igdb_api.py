@@ -178,10 +178,13 @@ def preparar_jogo(token, client_id, jogo):
 
     timestamp = jogo.get("first_release_date")
 
-    if timestamp is not None:
-        data_lancamento = formatar_data(timestamp)
-    else:
+    if timestamp is None:
         data_lancamento = "Não disponível."
+    elif not isinstance(timestamp, (int, float)):
+        print("A data de lançamento está em um formato inválido.")
+        return None
+    else:
+        data_lancamento = formatar_data(timestamp)
 
     ids_generos = jogo.get("genres", [])
 
