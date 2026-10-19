@@ -226,10 +226,13 @@ def preparar_jogo(token, client_id, jogo):
 
     rating = jogo.get("rating")
 
-    if rating is not None:
-        rating = round(rating, 2)
-    else:
+    if rating is None:
         rating = "Não disponível."
+    elif isinstance(rating, bool) or not isinstance(rating, (int, float)):
+        print("A avaliação do jogo está em um formato inválido.")
+        return None
+    else:
+        rating = round(rating, 2)
 
     return {
         "nome": nome,
