@@ -188,6 +188,10 @@ def preparar_jogo(token, client_id, jogo):
 
     ids_generos = jogo.get("genres", [])
 
+    if not isinstance(ids_generos, list):
+        print("Os gêneros do jogo estão em um formato inválido.")
+        return None
+
     if ids_generos:
         nomes_generos = buscar_generos(
             token,
