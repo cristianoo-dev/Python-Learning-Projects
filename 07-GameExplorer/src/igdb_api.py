@@ -211,6 +211,10 @@ def preparar_jogo(token, client_id, jogo):
 
     ids_plataformas = jogo.get("platforms", [])
 
+    if not isinstance(ids_plataformas, list):
+        print("As plataformas do jogo estão em um formato inválido.")
+        return None
+
     if ids_plataformas:
         nomes_plataformas = buscar_plataformas(
             token,
