@@ -126,6 +126,10 @@ def buscar_nomes(token, client_id, url, ids):
     if dados is None:
         return None
 
+    if not isinstance(dados, list):
+        print("A resposta da IGDB não está no formato esperado.")
+        return None
+
     nomes = []
 
     for item in dados:
