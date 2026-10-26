@@ -104,7 +104,9 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 def buscar_nomes(token, client_id, url, ids):
 
     if not isinstance(ids, list) or any(
-        isinstance(id_jogo, bool) or not isinstance(id_jogo, int)
+        isinstance(id_jogo, bool)
+        or not isinstance(id_jogo, int)
+        or id_jogo <= 0
         for id_jogo in ids
     ):
         print("Os IDs recebidos estão em um formato inválido.")
