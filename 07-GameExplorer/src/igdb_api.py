@@ -14,7 +14,7 @@ def criar_headers(token, client_id):
 
 def fazer_requisicao(url, headers, body):
 
-    try:
+    try: 
         response = requests.post(
             url,
             headers=headers,
@@ -32,8 +32,12 @@ def fazer_requisicao(url, headers, body):
         print(f"Erro na comunicação com a IGDB. Código: {response.status_code}")
         return None
 
+    except requests.exceptions.ConnectionError:
+        print("Não foi possível estabelecer conexão com a IGDB.")
+        return None
+
     except requests.exceptions.RequestException:
-        print("Não foi possível conectar à IGDB.")
+        print("Ocorreu um erro durante a requisição à IGDB.")
         return None
 
     return response
