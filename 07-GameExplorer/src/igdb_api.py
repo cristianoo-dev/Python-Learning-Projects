@@ -87,6 +87,14 @@ def buscar_jogos(token, client_id, nome_jogo):
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
 
+    if (
+        isinstance(jogo_id, bool)
+        or not isinstance(jogo_id, int)
+        or jogo_id <= 0
+    ):
+        print("O ID do jogo está em um formato inválido.")
+        return None
+
     headers = criar_headers(token, client_id)
 
     body = f'''
