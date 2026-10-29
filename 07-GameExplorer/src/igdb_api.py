@@ -307,4 +307,10 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
         print("Os detalhes do jogo não estão no formato esperado.")
         return None
 
+    nome = dados[0].get("name")
+
+    if not isinstance(nome, str) or not nome:
+        print("Os detalhes do jogo não contêm um nome válido.")
+        return None
+
     return dados[0]
