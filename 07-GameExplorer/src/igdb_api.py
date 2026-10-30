@@ -309,7 +309,7 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
 
     nome = dados[0].get("name")
 
-    if not isinstance(nome, str) or not nome:
+    if not isinstance(nome, str) or not nome.strip():
         print("Os detalhes do jogo não contêm um nome válido.")
         return None
 
