@@ -201,7 +201,7 @@ def preparar_jogo(token, client_id, jogo):
 
     if resumo is None:
         resumo = "Não disponível."
-    elif not isinstance(resumo, str):
+    elif not isinstance(resumo, str) or not resumo.strip():
         print("O resumo do jogo está em um formato inválido.")
         return None
 
