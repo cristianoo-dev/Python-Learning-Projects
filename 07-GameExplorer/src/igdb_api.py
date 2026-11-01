@@ -185,10 +185,15 @@ def buscar_plataformas(token, client_id, ids_plataformas):
 
 def formatar_data(timestamp):
 
-    data = datetime.fromtimestamp(timestamp)
+    try:
+        data = datetime.fromtimestamp(timestamp)
 
-    return data.strftime("%d/%m/%Y")
+        return data.strftime("%d/%m/%Y")
 
+    except (OverflowError, OSError, ValueError):
+        print("Não foi possível converter a data de lançamento.")
+        return None
+    
 def preparar_jogo(token, client_id, jogo):
 
     nome = jogo.get("name")
@@ -209,11 +214,16 @@ def preparar_jogo(token, client_id, jogo):
 
     if timestamp is None:
         data_lancamento = "Não disponível."
+
     elif not isinstance(timestamp, (int, float)):
         print("A data de lançamento está em um formato inválido.")
         return None
+
     else:
         data_lancamento = formatar_data(timestamp)
+
+        if data_lancamento is None:
+            return None
 
     ids_generos = jogo.get("genres", [])
 
