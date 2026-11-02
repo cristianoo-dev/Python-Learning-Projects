@@ -215,7 +215,7 @@ def preparar_jogo(token, client_id, jogo):
     if timestamp is None:
         data_lancamento = "Não disponível."
 
-    elif not isinstance(timestamp, (int, float)):
+    elif isinstance(timestamp, bool) or not isinstance(timestamp, (int, float)):
         print("A data de lançamento está em um formato inválido.")
         return None
 
