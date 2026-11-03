@@ -198,7 +198,7 @@ def preparar_jogo(token, client_id, jogo):
 
     nome = jogo.get("name")
 
-    if not isinstance(nome, str) or not nome:
+    if not isinstance(nome, str) or not nome.strip():
         print("Os dados do jogo não contêm um nome válido.")
         return None
 
