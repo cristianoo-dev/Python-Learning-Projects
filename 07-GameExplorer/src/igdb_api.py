@@ -278,6 +278,11 @@ def preparar_jogo(token, client_id, jogo):
     elif isinstance(rating, bool) or not isinstance(rating, (int, float)):
         print("A avaliação do jogo está em um formato inválido.")
         return None
+
+    elif not 0 <= rating <= 100:
+        print("A avaliação do jogo está fora do intervalo permitido.")
+        return None
+
     else:
         rating = round(rating, 2)
 
