@@ -202,6 +202,8 @@ def preparar_jogo(token, client_id, jogo):
         print("Os dados do jogo não contêm um nome válido.")
         return None
 
+    nome = nome.strip()
+
     resumo = jogo.get("summary")
 
     if resumo is None:
