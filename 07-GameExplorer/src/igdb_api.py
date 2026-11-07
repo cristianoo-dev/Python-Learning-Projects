@@ -263,6 +263,13 @@ def preparar_jogo(token, client_id, jogo):
         print("As plataformas do jogo estão em um formato inválido.")
         return None
 
+    if any(
+        isinstance(id_plataforma, bool) or not isinstance(id_plataforma, int) or id_plataforma <= 0
+        for id_plataforma in ids_plataformas
+    ):
+        print("Os IDs das plataformas estão em um formato inválido.")
+        return None
+
     if ids_plataformas:
         nomes_plataformas = buscar_plataformas(
             token,
