@@ -211,6 +211,8 @@ def preparar_jogo(token, client_id, jogo):
     elif not isinstance(resumo, str) or not resumo.strip():
         print("O resumo do jogo está em um formato inválido.")
         return None
+    else:
+        resumo = resumo.strip()
 
     timestamp = jogo.get("first_release_date")
 
