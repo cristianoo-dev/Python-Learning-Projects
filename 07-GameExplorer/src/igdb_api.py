@@ -79,7 +79,11 @@ def buscar_jogos(token, client_id, nome_jogo):
         return None
 
     for jogo in dados:
-        if not isinstance(jogo, dict) or not isinstance(jogo.get("name"), str):
+        if (
+            not isinstance(jogo, dict)
+            or not isinstance(jogo.get("name"), str)
+            or not jogo.get("name").strip()
+        ):
             print("Os resultados da busca não estão no formato esperado.")
             return None
 
