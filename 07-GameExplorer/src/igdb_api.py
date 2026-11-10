@@ -161,7 +161,7 @@ def buscar_nomes(token, client_id, url, ids):
         if (
             not isinstance(item, dict)
             or not isinstance(item.get("name"), str)
-            or not item["name"]
+            or not item.get("name").strip()
         ):
             print("A resposta da IGDB não está no formato esperado.")
             return None
