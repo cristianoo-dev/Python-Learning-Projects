@@ -164,9 +164,9 @@ def buscar_nomes(token, client_id, url, ids):
             or not item.get("name").strip()
         ):
             print("A resposta da IGDB não está no formato esperado.")
-            return None
-
-        nomes.append(item["name"])
+            return None 
+        
+        nomes.append(item["name"].strip()),
 
     return nomes
 
