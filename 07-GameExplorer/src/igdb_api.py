@@ -119,7 +119,7 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 
 def buscar_nomes(token, client_id, url, ids):
 
-    if not isinstance(ids, list) or any(
+    if not isinstance(ids, list) or not ids or any(
         isinstance(id_jogo, bool)
         or not isinstance(id_jogo, int)
         or id_jogo <= 0
@@ -166,7 +166,7 @@ def buscar_nomes(token, client_id, url, ids):
             print("A resposta da IGDB não está no formato esperado.")
             return None 
         
-        nomes.append(item["name"].strip()),
+        nomes.append(item["name"].strip())
 
     return nomes
 
