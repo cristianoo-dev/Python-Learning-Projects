@@ -155,6 +155,10 @@ def buscar_nomes(token, client_id, url, ids):
         print("A resposta da IGDB não está no formato esperado.")
         return None
 
+    if not dados:
+        print("Nenhum nome foi encontrado para os IDs informados.")
+        return []
+
     if len(dados) < len(ids):
         print("Aviso: a IGDB retornou menos registros do que o solicitado.")
 
