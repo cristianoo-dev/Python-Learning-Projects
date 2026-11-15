@@ -241,15 +241,8 @@ def preparar_jogo(token, client_id, jogo):
             return None
 
     ids_generos = jogo.get("genres", [])
-  
-    if not isinstance(ids_generos, list):
-        print("Os gêneros do jogo estão em um formato inválido.")
-        return None
 
-    if any(
-    isinstance(id_genero, bool) or not isinstance(id_genero, int) or id_genero <= 0
-    for id_genero in ids_generos
-    ):
+    if not validar_ids(ids_generos):
         print("Os IDs dos gêneros estão em um formato inválido.")
         return None
 
@@ -272,14 +265,7 @@ def preparar_jogo(token, client_id, jogo):
 
     ids_plataformas = jogo.get("platforms", [])
 
-    if not isinstance(ids_plataformas, list):
-        print("As plataformas do jogo estão em um formato inválido.")
-        return None
-
-    if any(
-        isinstance(id_plataforma, bool) or not isinstance(id_plataforma, int) or id_plataforma <= 0
-        for id_plataforma in ids_plataformas
-    ):
+    if not validar_ids(ids_plataformas):
         print("Os IDs das plataformas estão em um formato inválido.")
         return None
 
@@ -358,3 +344,17 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
         return None
 
     return dados[0]
+
+def validar_ids(ids):
+    if not isinstance(ids, list):
+        return False
+
+    if any(
+        isinstance(id_item, bool)
+        or not isinstance(id_item, int)
+        or id_item <= 0
+        for id_item in ids
+    ):
+        return False
+
+    return True
