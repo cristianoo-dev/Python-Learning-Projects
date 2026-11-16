@@ -207,6 +207,10 @@ def formatar_data(timestamp):
     
 def preparar_jogo(token, client_id, jogo):
 
+    if not isinstance(jogo, dict):
+        print("Os dados do jogo estão em um formato inválido.")
+        return None
+
     nome = jogo.get("name")
 
     if not isinstance(nome, str) or not nome.strip():
