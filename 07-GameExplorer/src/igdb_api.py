@@ -335,6 +335,7 @@ def obter_detalhes_jogo(token, client_id, jogo_id):
         return None
 
     if not dados:
+        print("Nenhum detalhe foi encontrado para o jogo informado.")
         return None
 
     if not isinstance(dados[0], dict):
