@@ -37,6 +37,10 @@ while True:
         print("O nome do jogo não pode estar vazio.")
         continue
 
+    if len(nome_jogo) > 100:
+        print("O nome do jogo não pode ultrapassar 100 caracteres.")
+        continue
+
     resultados = buscar_jogos(token, client_id, nome_jogo)
 
     if resultados is None:
