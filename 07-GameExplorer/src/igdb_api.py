@@ -83,6 +83,9 @@ def buscar_jogos(token, client_id, nome_jogo):
             not isinstance(jogo, dict)
             or not isinstance(jogo.get("name"), str)
             or not jogo.get("name").strip()
+            or isinstance(jogo.get("id"), bool)
+            or not isinstance(jogo.get("id"), int)
+            or jogo.get("id") <= 0
         ):
             print("Os resultados da busca não estão no formato esperado.")
             return None
