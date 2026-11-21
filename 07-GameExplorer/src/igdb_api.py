@@ -118,6 +118,15 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
     if response is None:
         return None
 
+    dados = obter_json(response)
+
+    if dados is None:
+        return None
+
+    if not isinstance(dados, list) or len(dados) != 1:
+        print("A resposta da IGDB não contém exatamente um jogo.")
+        return None
+
     return response
 
 def buscar_nomes(token, client_id, url, ids):
