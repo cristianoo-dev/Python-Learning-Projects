@@ -127,7 +127,11 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
         print("A resposta da IGDB não contém exatamente um jogo.")
         return None
 
-    return response
+    if not isinstance(dados[0], dict):
+        print("Os detalhes do jogo não estão no formato esperado.")
+        return None
+
+    return dados[0]
 
 def buscar_nomes(token, client_id, url, ids):
 
@@ -328,39 +332,22 @@ def preparar_jogo(token, client_id, jogo):
 
 def obter_detalhes_jogo(token, client_id, jogo_id):
 
-    resposta = buscar_detalhes_jogo(
+    dados = buscar_detalhes_jogo(
         token,
         client_id,
         jogo_id
     )
 
-    if resposta is None:
-        return None
-
-    dados = obter_json(resposta)
-
     if dados is None:
         return None
 
-    if not isinstance(dados, list):
-        print("A resposta da IGDB não está no formato esperado.")
-        return None
-
-    if not dados:
-        print("Nenhum detalhe foi encontrado para o jogo informado.")
-        return None
-
-    if not isinstance(dados[0], dict):
-        print("Os detalhes do jogo não estão no formato esperado.")
-        return None
-
-    nome = dados[0].get("name")
+    nome = dados.get("name")
 
     if not isinstance(nome, str) or not nome.strip():
         print("Os detalhes do jogo não contêm um nome válido.")
         return None
 
-    return dados[0]
+    return dados
 
 def validar_ids(ids):
     if not isinstance(ids, list):
