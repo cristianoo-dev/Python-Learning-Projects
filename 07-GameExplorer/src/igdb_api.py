@@ -90,6 +90,8 @@ def buscar_jogos(token, client_id, nome_jogo):
             print("Os resultados da busca não estão no formato esperado.")
             return None
 
+        jogo["name"] = jogo["name"].strip()
+
     return dados
 
 def buscar_detalhes_jogo(token, client_id, jogo_id):
