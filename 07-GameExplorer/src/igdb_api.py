@@ -1,5 +1,5 @@
 import requests
-from datetime import datetime
+from datetime import datetime, timezone
 
 URL_JOGOS = "https://api.igdb.com/v4/games"
 URL_GENEROS = "https://api.igdb.com/v4/genres"
@@ -215,7 +215,7 @@ def buscar_plataformas(token, client_id, ids_plataformas):
 def formatar_data(timestamp):
 
     try:
-        data = datetime.fromtimestamp(timestamp)
+        data = datetime.fromtimestamp(timestamp, timezone.utc)
 
         return data.strftime("%d/%m/%Y")
 
