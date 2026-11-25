@@ -52,6 +52,16 @@ def obter_json(response):
         return None
 
 def buscar_jogos(token, client_id, nome_jogo):
+        
+    if not isinstance(nome_jogo, str) or not nome_jogo.strip():
+        print("O nome do jogo está em um formato inválido.")
+        return None
+
+    nome_jogo = nome_jogo.strip()
+
+    if len(nome_jogo) > 100:
+        print("O nome do jogo não pode ultrapassar 100 caracteres.")
+        return None
 
     headers = criar_headers(token, client_id)
 
