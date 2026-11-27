@@ -7,6 +7,18 @@ URL_PLATAFORMAS = "https://api.igdb.com/v4/platforms"
 
 def criar_headers(token, client_id):
 
+    if (
+        not isinstance(token, str)
+        or not token.strip()
+        or not isinstance(client_id, str)
+        or not client_id.strip()
+    ):
+        print("As credenciais de autenticação estão em um formato inválido.")
+        return None
+
+    token = token.strip()
+    client_id = client_id.strip()
+
     return {
         "Client-ID": client_id,
         "Authorization": f"Bearer {token}"
@@ -65,6 +77,9 @@ def buscar_jogos(token, client_id, nome_jogo):
 
     headers = criar_headers(token, client_id)
 
+    if headers is None:
+        return None
+
     body = f'''
         search "{nome_jogo}";
         fields id, name;
@@ -116,6 +131,9 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 
     headers = criar_headers(token, client_id)
 
+    if headers is None:
+        return None
+
     body = f'''
         where id = {jogo_id};
         fields name, summary, first_release_date, rating, genres, platforms;
@@ -157,6 +175,9 @@ def buscar_nomes(token, client_id, url, ids):
         return None
 
     headers = criar_headers(token, client_id)
+
+    if headers is None:
+        return None
 
     ids_formatados = ",".join(map(str, ids))
 
