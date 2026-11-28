@@ -165,6 +165,10 @@ def buscar_detalhes_jogo(token, client_id, jogo_id):
 
 def buscar_nomes(token, client_id, url, ids):
 
+    if url not in (URL_GENEROS, URL_PLATAFORMAS):
+        print("A URL informada está em um formato inválido.")
+        return None
+    
     if not isinstance(ids, list) or not ids or any(
         isinstance(id_jogo, bool)
         or not isinstance(id_jogo, int)
